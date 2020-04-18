@@ -1,6 +1,6 @@
 import cv2 as cv
 face_cascade=cv.CascadeClassifier('haarcascade_frontalface_default.xml')
-cap=cv.VideoCapture(0)
+cap=cv.VideoCapture('bts.mp4')
 while cap.isOpened():
     _,img=cap.read()
     gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
