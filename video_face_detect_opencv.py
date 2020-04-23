@@ -1,6 +1,6 @@
 import cv2 as cv
 face_cascade=cv.CascadeClassifier('haarcascade_frontalface_default.xml')
-video_
+
 cap=cv.VideoCapture('bts.mp4')
 while cap.isOpened():
     _,img=cap.read()
