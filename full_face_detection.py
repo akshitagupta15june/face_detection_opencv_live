@@ -17,14 +17,14 @@ def draw_boundary(img, classifier, scaleFactor, minNeighbors, color, text):
 # Method to detect the features
 def detect(img, faceCascade, eyeCascade, noseCascade, mouthCascade):
     color = {"blue":(255,0,0), "red":(0,0,255), "green":(0,0,255), "white":(255,255,255)}
-    coords = draw_boundary(img, faceCascade, 1.1, 14, color['blue'], "Face")
+    coords = draw_boundary(img, faceCascade, 1.1, 10, color['blue'], "Face")
     # If feature is detected, the draw_boundary method will return the x,y coordinates and width and height of rectangle else the length of coords will be 0
     if len(coords)==4:
         # Updating region of interest by cropping image
         roi_img = img[coords[1]:coords[1]+coords[3], coords[0]:coords[0]+coords[2]]
         # Passing roi, classifier, scaling factor, Minimum neighbours, color, label text
-        coords = draw_boundary(roi_img, eyeCascade, 1.1, 12, color['red'], "Eye")
-        coords = draw_boundary(roi_img, noseCascade, 1.1, 4, color['green'], "Nose")
+        coords = draw_boundary(roi_img, eyeCascade, 1.1, 14, color['red'], "Eye")
+        coords = draw_boundary(roi_img, noseCascade, 1.1, 5, color['green'], "Nose")
         coords = draw_boundary(roi_img, mouthCascade, 1.1, 20, color['white'], "Mouth")
     return img
 
@@ -32,11 +32,11 @@ def detect(img, faceCascade, eyeCascade, noseCascade, mouthCascade):
 # Loading classifiers
 faceCascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 eyesCascade = cv2.CascadeClassifier('haarcascade_eye.xml')
-noseCascade = cv2.CascadeClassifier('Nariz.xml')
-mouthCascade = cv2.CascadeClassifier('Mouth.xml')
+noseCascade = cv2.CascadeClassifier('haarcascade_mcs_nose.xml')
+mouthCascade = cv2.CascadeClassifier('haarcascade_mcs_mouth.xml')
 
 # Capturing real time video stream. 0 for built-in web-cams, 0 or -1 for external web-cams
-video_capture = cv2.VideoCapture(-1)
+video_capture = cv2.VideoCapture(0)
 
 while True:
     # Reading image from video stream
